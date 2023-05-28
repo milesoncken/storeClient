@@ -8,6 +8,10 @@ import Confirmation from "./scenes/checkout/Confirmation";
 import Navbar from "./scenes/global/Navbar.jsx";
 import CartMenu from "./scenes/global/CartMenu.jsx";
 import Footer from "./scenes/global/Footer.jsx";
+import Login from "./scenes/auth/Login.jsx";
+import SignUp from "./scenes/auth/SignUp.jsx";
+import Dashboard from "./scenes/dashboard/Dashboard.jsx";
+import Authenticated from "./routes/Authenticated.jsx";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -30,7 +34,18 @@ function App() {
           <Route path='item/:itemId' element={<ItemDetails />} />
           <Route path='checkout' element={<Checkout />} />
           <Route path='checkout/success' element={<Confirmation />} />
+          <Route path='login' element={<Login />} />
+          <Route path='signup' element={<SignUp />} />
+          <Route
+            path='dashboard'
+            element={
+              <Authenticated>
+                <Dashboard></Dashboard>
+              </Authenticated>
+            }
+          />
         </Routes>
+
         <CartMenu />
         <Footer />
       </BrowserRouter>
