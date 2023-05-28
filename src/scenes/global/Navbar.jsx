@@ -8,7 +8,7 @@ import {
   SearchOutlined,
 } from "@mui/icons-material";
 
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { shades } from "../../theme";
 
 import { setIsCartOpen } from "../../state";
@@ -52,7 +52,11 @@ const Navbar = () => {
           <IconButton sc={{ color: "black" }}>
             <SearchOutlined />
           </IconButton>
-          <IconButton sc={{ color: "black" }}>
+          <IconButton
+            onClick={() => {
+              <Navigate to={"/login"} />;
+            }}
+            sc={{ color: "black" }}>
             <PersonOutline />
           </IconButton>
           <Badge

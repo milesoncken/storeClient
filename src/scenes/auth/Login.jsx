@@ -3,7 +3,9 @@ import React from "react";
 import { shades } from "../../theme";
 import { ErrorMessage, Formik } from "formik";
 import * as yup from "yup";
+import { Navigate } from "react-router-dom";
 
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { useLocalState } from "../../state/useLocalStorage";
 
@@ -21,6 +23,7 @@ const loginSchema = yup.object().shape({
 
 function Login() {
   const [jwt, setJwt] = useLocalState("", "jwt");
+  const [errors, setErrors] = useState();
 
   return (
     <Box zIndex={10} width='100%' m='100px auto'>
@@ -40,8 +43,14 @@ function Login() {
               }),
             }).then((res) => {
               res.json().then((json) => {
-                setJwt(json);
-                console.log(jwt);
+                if (res.status.valueOf() === 400) {
+                  setErrors(json);
+                  console.log(json);
+                } else {
+                  setErrors(null);
+                  setJwt(json);
+                  <Navigate to={"/dashboard"} />;
+                }
               });
             });
           }}
@@ -69,6 +78,7 @@ function Login() {
               />
               <Box sx={{ marginBottom: "15px", color: "red" }}>
                 <ErrorMessage name='password'></ErrorMessage>
+                <Typography>{errors}</Typography>
               </Box>
 
               <Button
