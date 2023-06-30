@@ -3,7 +3,7 @@ import React from "react";
 import { shades } from "../../theme";
 import { ErrorMessage, Formik } from "formik";
 import * as yup from "yup";
-import { Navigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 
 import { useState } from "react";
 import TextField from "@mui/material/TextField";
@@ -24,6 +24,8 @@ const loginSchema = yup.object().shape({
 function Login() {
   const [jwt, setJwt] = useLocalState("", "jwt");
   const [errors, setErrors] = useState();
+  const [success, setSuccess] = useState(null);
+  const navigation = useNavigate();
 
   return (
     <Box zIndex={10} width='100%' m='100px auto'>
@@ -34,6 +36,7 @@ function Login() {
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => {
+            setSuccess(null);
             fetch("api/login", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -49,7 +52,8 @@ function Login() {
                 } else {
                   setErrors(null);
                   setJwt(json);
-                  <Navigate to={"/dashboard"} />;
+                  setSuccess(true);
+                  navigation("/dashboard");
                 }
               });
             });
@@ -95,6 +99,14 @@ function Login() {
                 }}>
                 Login
               </Button>
+              <div
+                style={{
+                  color: "green",
+                  display: success != null ? "inline" : "none",
+                }}>
+                Login Succces
+              </div>
+
               <Typography
                 sx={{ color: shades.neutral[900], alignSelf: "center" }}>
                 Dont have an account? <a href='/signup'>Sign Up</a>
