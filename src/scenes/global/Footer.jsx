@@ -21,46 +21,42 @@ function Footer() {
             variant='h4'
             fontWeight='bold'
             mb='30px'
-            color={shades.secondary[500]}>
-            Amelias
+            color={shades.secondary[600]}>
+            RAZA
           </Typography>
           <div>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-            aliquip ex ea commodo consequat
+            Raza Clothing, a name synonymous with style and sophistication,
+            invites you to embrace a sartorial revolution. Discover captivating
+            designs, impeccable craftsmanship, and a multitude of options that
+            empower you to express your unique personality through fashion.
           </div>
         </Box>
 
         <Box>
           <Typography variant='h4' fontWeight='bold' mb='30px'>
-            About Us
+            About
           </Typography>
-          <Typography mb='30px'>Careers</Typography>
-          <Typography mb='30px'>Our Stores</Typography>
-          <Typography mb='30px'>Terms & Conditions</Typography>
-          <Typography mb='30px'>Privacy Policy</Typography>
-        </Box>
-
-        <Box>
-          <Typography variant='h4' fontWeight='bold' mb='30px'>
-            Customer Care
+          <Typography mb='30px'>
+            <a href='/about'>Our Mission</a>
           </Typography>
-          <Typography mb='30px'>Help Center</Typography>
-          <Typography mb='30px'>Track Your Order</Typography>
-          <Typography mb='30px'>Corporate & Bulk Purchasing</Typography>
-          <Typography mb='30px'>Returns & Refunds</Typography>
+          <Typography mb='30px'>
+            <a href='/terms'>Terms & Conditions</a>
+          </Typography>
+          <Typography mb='30px'>
+            <a href='privacy'>Privacy Policy</a>
+          </Typography>
         </Box>
 
         <Box width='clamp(20%, 25%, 30%)'>
           <Typography variant='h4' fontWeight='bold' mb='30px'>
-            Contact Us
+            Contact
           </Typography>
           <Typography mb='30px'>
-            50 north Whatever Blvd, Washington, DC 10501
+            1831 Nancy Street
+            <br /> Raleigh NC 27604
           </Typography>
           <Typography mb='30px' sx={{ wordWrap: "break-word" }}>
-            Email: milesoncken@gmail.com
+            Email: razaclothing@gmail.com
           </Typography>
           <Typography mb='30px'>(222)333-4444</Typography>
         </Box>

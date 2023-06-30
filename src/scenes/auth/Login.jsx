@@ -3,7 +3,9 @@ import React from "react";
 import { shades } from "../../theme";
 import { ErrorMessage, Formik } from "formik";
 import * as yup from "yup";
+import { Navigate, useNavigate } from "react-router-dom";
 
+import { useState } from "react";
 import TextField from "@mui/material/TextField";
 import { useLocalState } from "../../state/useLocalStorage";
 
@@ -21,6 +23,9 @@ const loginSchema = yup.object().shape({
 
 function Login() {
   const [jwt, setJwt] = useLocalState("", "jwt");
+  const [errors, setErrors] = useState();
+  const [success, setSuccess] = useState(null);
+  const navigation = useNavigate();
 
   return (
     <Box zIndex={10} width='100%' m='100px auto'>
@@ -31,6 +36,7 @@ function Login() {
         <Formik
           initialValues={{ email: "", password: "" }}
           onSubmit={(values) => {
+            setSuccess(null);
             fetch("api/login", {
               method: "POST",
               headers: { "Content-Type": "application/json" },
@@ -40,8 +46,15 @@ function Login() {
               }),
             }).then((res) => {
               res.json().then((json) => {
-                setJwt(json);
-                console.log(jwt);
+                if (res.status.valueOf() === 400) {
+                  setErrors(json);
+                  console.log(json);
+                } else {
+                  setErrors(null);
+                  setJwt(json);
+                  setSuccess(true);
+                  navigation("/dashboard");
+                }
               });
             });
           }}
@@ -69,6 +82,7 @@ function Login() {
               />
               <Box sx={{ marginBottom: "15px", color: "red" }}>
                 <ErrorMessage name='password'></ErrorMessage>
+                <Typography>{errors}</Typography>
               </Box>
 
               <Button
@@ -85,6 +99,14 @@ function Login() {
                 }}>
                 Login
               </Button>
+              <div
+                style={{
+                  color: "green",
+                  display: success != null ? "inline" : "none",
+                }}>
+                Login Succces
+              </div>
+
               <Typography
                 sx={{ color: shades.neutral[900], alignSelf: "center" }}>
                 Dont have an account? <a href='/signup'>Sign Up</a>

@@ -24,12 +24,9 @@ function Authenticated({ children }) {
         .then((data) => {
           if (Object.values(data)[0] === "invalid") {
             console.log("invalid jwt send user to login");
-            // <Navigate to={"/login"} />;
+            <Navigate to={"/login"} />;
             setIsAuthenticated(false);
           } else {
-            console.log("Valid user got back: ");
-            console.log(data);
-            console.log("keep them on page ");
             setIsAuthenticated(true);
           }
         })

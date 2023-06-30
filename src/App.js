@@ -12,6 +12,9 @@ import Login from "./scenes/auth/Login.jsx";
 import SignUp from "./scenes/auth/SignUp.jsx";
 import Dashboard from "./scenes/dashboard/Dashboard.jsx";
 import Authenticated from "./routes/Authenticated.jsx";
+import About from "./scenes/about/About.jsx";
+import Privacy from "./scenes/about/Privacy.jsx";
+import Terms from "./scenes/about/Terms.jsx";
 
 const ScrollToTop = () => {
   const { pathname } = useLocation();
@@ -44,6 +47,9 @@ function App() {
               </Authenticated>
             }
           />
+          <Route path='about' element={<About />} />
+          <Route path='terms' element={<Terms />} />
+          <Route path='privacy' element={<Privacy />} />
         </Routes>
 
         <CartMenu />

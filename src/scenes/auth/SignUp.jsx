@@ -44,16 +44,20 @@ function SignUp() {
                 email: values.email,
                 password: values.password,
               }),
-            }).then((res) => {
-              res.json().then((json) => {
-                console.log(json);
-                if (res.status.valueOf() === 400) {
-                  setErrors(json);
-                } else {
-                  setIsSignedUp(true);
-                }
+            })
+              .then((res) => {
+                res.json().then((json) => {
+                  console.log(Object.values(json)[0]);
+                  if (res.status.valueOf() === 400) {
+                    setErrors(json);
+                  } else {
+                    setIsSignedUp(true);
+                  }
+                });
+              })
+              .catch((err) => {
+                setErrors(err);
               });
-            });
           }}
           validationSchema={loginSchema}>
           {({ handleChange, handleSubmit }) => (
@@ -81,7 +85,8 @@ function SignUp() {
               <Box sx={{ marginBottom: "15px", color: "red" }}>
                 <ErrorMessage name='password'></ErrorMessage>
                 <Typography>{errors.password}</Typography>
-
+                <ErrorMessage name='closed'></ErrorMessage>
+                <Typography>{errors.error}</Typography>
                 {!isSignedUp ? (
                   <>
                     <Button

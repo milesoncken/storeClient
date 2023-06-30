@@ -8,14 +8,15 @@ import {
   SearchOutlined,
 } from "@mui/icons-material";
 
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { shades } from "../../theme";
 
-import { setIsCartOpen } from "../../state";
+import { setIsCartOpen, setIsUserOpen } from "../../state";
 
 const Navbar = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
   const cart = useSelector((state) => state.cart.cart);
 
   return (
@@ -40,19 +41,24 @@ const Navbar = () => {
           onClick={() => {
             navigate("/");
           }}
+          style={{ fontSize: 40, fontWeight: "400" }}
           color={shades.secondary[500]}
           sx={{ "&:hover": { cursor: "pointer" } }}>
-          Amelia's Shop
+          RAZA
         </Box>
         <Box
           display={"flex"}
           justifyContent={"space-between"}
           columnGap={"20px"}
           zIndex={2}>
-          <IconButton sc={{ color: "black" }}>
+          {/* <IconButton sc={{ color: "black" }}>
             <SearchOutlined />
-          </IconButton>
-          <IconButton sc={{ color: "black" }}>
+          </IconButton> */}
+          <IconButton
+            onClick={() => {
+              navigate("/login");
+            }}
+            sc={{ color: "black" }}>
             <PersonOutline />
           </IconButton>
           <Badge
@@ -77,9 +83,9 @@ const Navbar = () => {
             </IconButton>
           </Badge>
 
-          <IconButton sc={{ color: "black" }}>
+          {/* <IconButton sc={{ color: "black" }}>
             <MenuOutlined />
-          </IconButton>
+          </IconButton> */}
         </Box>
       </Box>
     </Box>
