@@ -1,4 +1,4 @@
-import ShoppingList from "./ShoppingList";
+import ProductList from "./ProductList";
 import Subscribe from "./Subscribe";
 import MainCarousel from "./MainCarousel";
 
@@ -6,7 +6,7 @@ function Home() {
   return (
     <div className='home'>
       <MainCarousel />
-      <ShoppingList />
+      <ProductList />
       <Subscribe />
     </div>
   );
